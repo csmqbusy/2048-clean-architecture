@@ -4,7 +4,7 @@ import tty
 import termios
 
 from domain.enums_.move_direction import MoveDirection
-from presentation.presenters.cli_presenter import CliOutput
+from presentation.cli.models import CliRenderData
 
 
 class CliView:
@@ -16,7 +16,7 @@ class CliView:
         self._default_color = default_color
         self._border_color = border_color
 
-    def display(self, data: CliOutput) -> None:
+    def display(self, data: CliRenderData) -> None:
         """
 
         :return:

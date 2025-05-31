@@ -8,8 +8,8 @@ from domain.entities.tile_spawner import TileSpawner
 from domain.interfaces.domain.board import IBoard
 from domain.interfaces.domain.game import IGame
 from domain.interfaces.domain.tile_spawner import ITileSpawner
-from presentation.presenters.cli_presenter import CliPresenter
-from presentation.views.cli_view import CliView
+from presentation.cli.presenter import CliPresenter
+from presentation.cli.view import CliView
 
 
 def create_dimension_dependency() -> Dimension:
