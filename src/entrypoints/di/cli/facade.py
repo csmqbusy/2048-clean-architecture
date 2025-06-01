@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 
-from application.ports.logger import ILogger
 from application.use_cases.game_use_case import GameLoopUseCase
-from domain.interfaces.domain.game import IGame
 from entrypoints.di.cli.container import (
     create_dimension_dependency,
     create_board_dependency,
@@ -16,10 +14,21 @@ from entrypoints.di.cli.container import (
 
 @dataclass
 class Dependencies:
+    """
+    Container for all application dependencies required to run the 2048 game.
+
+    :param game_loop: Main game loop use case that coordinates the game flow
+    """
     game_loop: GameLoopUseCase
 
 
 def dependencies_facade() -> Dependencies:
+    """
+    Creates and wires all application dependencies for CLI version of 2048.
+    Builds the dependency graph in proper initialization order.
+
+    :return: Fully initialized Dependencies container ready for game execution
+    """
     dimension = create_dimension_dependency()
 
     board = create_board_dependency(dimension=dimension)

@@ -6,11 +6,17 @@ from presentation.cli.models import CliRenderData, TileColor
 
 
 class CliPresenter:
-    """Present 2048 game state in command line interface"""
+    """
+    Converts 2048 game state into formatted data for command-line interface rendering.
+    Handles:
+    - Board tile formatting and coloring
+    - Game status messages
+    - Score display
+    """
 
     _DEFAULT_IN_PROGRESS_MSG = "Merge the tiles and reach 2048! ✨"
     _DEFAULT_WIN_MSG = "Congratulations! You've won! 🎯 Want to try for a higher score?"
-    _DEFAULT_LOSE_MSG = "Game over! Don’t give up—try again and aim higher! 🔄"
+    _DEFAULT_LOSE_MSG = "Game over! Don't give up—try again and aim higher! 🔄"
 
     def __init__(
         self,
@@ -19,6 +25,15 @@ class CliPresenter:
         win_message: str = _DEFAULT_WIN_MSG,
         lose_message: str = _DEFAULT_LOSE_MSG,
     ):
+        """
+        Initializes the CLI presenter with display configuration.
+
+        :param tile_width: Width of each tile in characters (minimum 4)
+        :param in_progress_message: Custom message to show during gameplay
+        :param win_message: Custom message to show when player wins
+        :param lose_message: Custom message to show when player loses
+        :raises ValueError: If tile_width is less than 4
+        """
         if tile_width < 4:
             raise ValueError("Tile width must be at least 4")
 
@@ -29,10 +44,15 @@ class CliPresenter:
 
     def present(self, game_state: GameState) -> CliRenderData:
         """
+        Transforms raw game state into CLI-ready formatted data including:
+        - Centered tile values with proper spacing
+        - Color mapping for each tile
+        - Contextual game message
+        - Formatted score display
 
-        :return:
+        :param game_state: Current game state including board, score, and status
+        :return: Structured data ready for CLI rendering
         """
-
         formatted_board = []
         tiles_colors = []
 
