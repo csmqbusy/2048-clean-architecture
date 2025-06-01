@@ -3,29 +3,30 @@ from typing import Protocol
 
 class ILogger(Protocol):
     """
-    Interface for class that logs messages.
+    Defines a logging interface for different log levels.
+    Any logger implementation should adhere to this protocol to ensure consistent logging behavior.
     """
 
     def info(self, message: str) -> None:
         """
-        Logs an info message.
+        Logs an informational message, typically used for general application flow tracking.
 
-        :param message: message template
+        :param message: The message to log, which may include placeholders for formatting.
         :return: None
         """
 
     def error(self, message: str) -> None:
         """
-        Logs an error message.
+        Logs an error message, indicating a problem that needs attention but may not halt execution.
 
-        :param message: message template
+        :param message: The error message to log, which may include placeholders for formatting.
         :return: None
         """
 
     def debug(self, message: str) -> None:
         """
-        Logs a debug message.
+        Logs a debug message, useful for development and troubleshooting purposes.
 
-        :param message: message template
+        :param message: The debug message to log, typically containing detailed internal state information.
         :return: None
         """
