@@ -7,6 +7,8 @@ from domain.enums_.tile_value import TileValue
 
 
 class Board:
+    """Represents the game board in 2048, containing tiles and their positions."""
+
     def __init__(self, tiles: list[list[Tile]]) -> None:
         self._tiles = tiles
 
@@ -16,7 +18,6 @@ class Board:
 
         :return: a list of all tiles.
         """
-
         return self._tiles
 
     def get_empty_tiles_positions(self) -> list[TilePosition]:
@@ -26,7 +27,6 @@ class Board:
 
         :return: a list of positions of all empty tiles on the board.
         """
-
         return [
             TilePosition(row_idx=row_idx, col_idx=col_idx)
             for row_idx, row in enumerate(self._tiles)
@@ -37,11 +37,11 @@ class Board:
     @classmethod
     def create(cls, dimension: Dimension) -> Board:
         """
+        Creates a new empty board with the specified dimensions.
 
-        :param dimension: dimension of the board
-        :return: a new board with the given dimension
+        :param dimension: The size of the board (rows x cols).
+        :return: A new Board instance filled with empty tiles (TileValue.ZERO).
         """
-
         default_value: TileValue = TileValue.ZERO
 
         tiles: list[list[Tile]] = [

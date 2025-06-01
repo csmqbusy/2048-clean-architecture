@@ -9,29 +9,30 @@ from domain.dataclasses_.tile_position import TilePosition
 
 class IBoard(Protocol):
     """
-    Interface for class that represents a board in the game.
+    Interface defining the contract for a game board in 2048.
+
+    Any concrete implementation must provide these methods to interact with the board state.
     """
 
     def get_tiles(self) -> list[list[Tile]]:
         """
-        Returns a list of all tiles on the board at the current moment.
+        Retrieves the current state of all tiles on the board.
 
-        :return: a list of all tiles.
+        :return: 2D list of Tile objects representing the board's state.
         """
 
     def get_empty_tiles_positions(self) -> list[TilePosition]:
         """
-        Returns a list of positions of all empty tiles on the board at the
-        current moment.
+        Finds all empty (TileValue.ZERO) positions on the board.
 
-        :return: a list of positions of all empty tiles.
+        :return: List of TilePosition objects marking empty cells.
         """
 
     @classmethod
-    def create(cls, dim: Dimension) -> IBoard:
+    def create(cls, dimension: Dimension) -> IBoard:
         """
-        Factory method to create a board of a given dimension.
+        Factory method to create a new empty board instance.
 
-        :param dim: dimension of the board.
-        :return: a new board with the given dimension.
+        :param dimension: Board dimensions (rows x columns).
+        :return: New board instance initialized with empty tiles.
         """

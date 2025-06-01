@@ -6,7 +6,10 @@ from domain.enums_.tile_value import TileValue
 @dataclass
 class Tile:
     """
-    Represents a tile on the board.
+    Represents a single tile on the 2048 game board.
+
+    Each tile carries a value that determines its visual representation
+    and merge behavior in the game. The value comes from TileValue enum.
     """
 
     value: TileValue

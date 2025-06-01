@@ -12,7 +12,10 @@ from domain.interfaces.domain.tile_spawner import ITileSpawner
 
 class Game:
     """
-    Class that represents a game.
+    Represents the core game logic for 2048, handling moves, scoring and game state.
+
+    Manages the game board, processes player moves, checks win/lose conditions,
+    and spawns new tiles after valid moves.
     """
 
     def __init__(
@@ -20,17 +23,25 @@ class Game:
         board: IBoard,
         tile_spawner: ITileSpawner,
     ) -> None:
+        """
+        Initializes a new game instance.
+
+        :param board: The game board implementation
+        :param tile_spawner: Tile spawner implementation
+        """
         self._board = board
         self._dim = len(board.get_tiles())
         self._tile_spawner = tile_spawner
         self._score = 0
 
     def start(self) -> GameState:
+        """
+        Starts a new game by spawning initial tiles.
+
+        :return: Initial game state with 2 spawned tiles
+        """
         tiles: list[list[Tile]] = self._board.get_tiles()
-
-        # Initial spawn of two random tiles
         self._tile_spawner.spawn(tiles, 2, self._board.get_empty_tiles_positions())
-
         return GameState(
             tiles=self._board.get_tiles(),
             score=0,
@@ -39,6 +50,12 @@ class Game:
         )
 
     def make_move(self, move_direction: MoveDirection) -> GameState:
+        """
+        Processes a player move and updates game state.
+
+        :param move_direction: Direction to move tiles
+        :return: Updated game state after move processing
+        """
         tiles: list[list[Tile]] = self._board.get_tiles()
         tiles_before = copy.deepcopy(tiles)
         self._apply_move(move_direction, tiles)
@@ -47,7 +64,6 @@ class Game:
         if self._has_board_changed(tiles_before, tiles_after):
             self._tile_spawner.spawn(tiles_after, 1, self._board.get_empty_tiles_positions())
 
-        # check if game is over
         game_result: GameResult | None = self._get_game_result(tiles_after)
         game_status = GameStatus.IN_PROGRESS if game_result is None else GameStatus.COMPLETED
 
@@ -59,6 +75,12 @@ class Game:
         )
 
     def _apply_move(self, move: MoveDirection, tiles: list[list[Tile]]) -> None:
+        """
+        Applies move in specified direction to the tiles.
+
+        :param move: Direction to move
+        :param tiles: Current board tiles to modify
+        """
         if move == MoveDirection.UP:
             self._apply_move_up(tiles)
         elif move == MoveDirection.DOWN:
@@ -70,12 +92,14 @@ class Game:
 
     def _apply_move_right(self, tiles: list[list[Tile]]) -> None:
         """
-        [0, 2, 2, 0],        [0, 0, 0, 4],
-        [0, 4, 4, 4],   =>   [0, 0, 4, 8],
-        [2, 0, 2, 8],   =>   [0, 0, 4, 8],
-        [4, 8, 16, 16],      [0, 4, 8, 32],
-        """
+        Moves all tiles to the right, merging matching pairs.
 
+        Example transformation:
+        [0, 2, 2, 0]    =>   [0, 0, 0, 4]
+        [0, 4, 4, 4]    =>   [0, 0, 4, 8]
+        [2, 0, 2, 8]    =>   [0, 0, 4, 8]
+        [4, 8, 16, 16]  =>   [0, 4, 8, 32]
+        """
         # all zeros should "pop up" in the opposite for move direction
         for row in tiles:
             target = self._dim - 1
@@ -108,6 +132,15 @@ class Game:
                 target -= 1
 
     def _apply_move_left(self, tiles: list[list[Tile]]) -> None:
+        """
+        Moves all tiles to the left, merging matching pairs.
+
+        Example transformation:
+        [0, 2, 2, 0]    =>   [4, 0, 0, 0]
+        [0, 4, 4, 4]    =>   [8, 4, 0, 0]
+        [2, 0, 2, 8]    =>   [4, 8, 0, 0]
+        [4, 8, 16, 16]  =>   [4, 8, 32, 0]
+        """
         # all zeros should "pop up" in the opposite for move direction
         for row in tiles:
             target = 0
@@ -140,6 +173,15 @@ class Game:
                 target += 1
 
     def _apply_move_down(self, tiles: list[list[Tile]]) -> None:
+        """
+        Moves all tiles downward, merging matching pairs.
+
+        Example transformation:
+        [2, 0, 0, 0]   =>   [0, 0, 0, 0]
+        [2, 4, 0, 0]   =>   [0, 0, 0, 0]
+        [0, 4, 8, 0]   =>   [0, 8, 0, 0]
+        [0, 8, 8, 16]  =>   [4, 8, 16, 16]
+        """
         # all zeros should "pop up" in the opposite for move direction
         for i in range(self._dim):
             target = self._dim - 1
@@ -176,6 +218,15 @@ class Game:
                 target -= 1
 
     def _apply_move_up(self, tiles: list[list[Tile]]) -> None:
+        """
+        Moves all tiles upward, merging matching pairs.
+
+        Example transformation:
+        [2, 0, 0, 0]   =>   [4, 8, 16, 16]
+        [2, 4, 0, 0]   =>   [0, 8, 0, 0]
+        [0, 4, 8, 0]   =>   [0, 0, 0, 0]
+        [0, 8, 8, 16]  =>   [0, 0, 0, 0]
+        """
         # all zeros should "pop up" in the opposite for move direction
         for i in range(self._dim):
             target = 0
@@ -216,6 +267,13 @@ class Game:
         tiles_before: list[list[Tile]],
         tiles_after: list[list[Tile]],
     ) -> bool:
+        """
+        Checks if board state changed after move attempt.
+
+        :param tiles_before: Board state before move
+        :param tiles_after: Board state after move
+        :return: True if any tile changed position/value
+        """
         for i in range(self._dim):
             for j in range(self._dim):
                 if tiles_before[i][j].value != tiles_after[i][j].value:
@@ -224,13 +282,11 @@ class Game:
 
     def _get_game_result(self, tiles: list[list[Tile]]) -> GameResult | None:
         """
-        A method for determining whether the game is over
-        (the player has won or there are no possible moves).
+        Determines current game result (win/lose) based on board state.
 
-        :param tiles: list of all tiles on the board.
-        :return: the result of the game if it is over, None otherwise.
+        :param tiles: Current board tiles
+        :return: GameResult if game ended, None otherwise
         """
-
         if self._is_win(tiles):
             return GameResult.WIN
 
@@ -241,30 +297,34 @@ class Game:
 
     def _is_win(self, tiles: list[list[Tile]]) -> bool:
         """
+        Checks if winning condition is met (TileValue.ELEVEN present).
 
-        :param tiles:
-        :return:
+        :param tiles: Current board tiles
+        :return: True if winning tile found
         """
-
         for i in range(self._dim):
             for j in range(self._dim):
                 if tiles[i][j].value == TileValue.ELEVEN:
                     return True
-
         return False
 
     def _is_lose(self, tiles: list[list[Tile]]) -> bool:
         """
-        Defeat happens if there is no more opportunity to make a move.
+        Checks if losing condition is met (no valid moves left).
 
-        :return: True if any moves are available, False otherwise.
+        :param tiles: Current board tiles
+        :return: True if no valid moves available
         """
-
         empty_tiles_positions = self._board.get_empty_tiles_positions()
-
         return len(empty_tiles_positions) == 0 and not self._has_moves_left(tiles)
 
     def _has_moves_left(self, tiles: list[list[Tile]]) -> bool:
+        """
+        Checks if any valid moves remain on the board.
+
+        :param tiles: Current board tiles
+        :return: True if at least one valid move exists
+        """
         # search for available moves horizontally
         for row in tiles:
             for i in range(1, self._dim):

@@ -3,10 +3,16 @@ from enum import IntEnum
 
 class TileValue(IntEnum):
     """
-    Defines all possible tile values in 2048. Names (ONE, TWO...) represent
-    progression levels where each level = previous × 2 (2¹, 2², 2³...).
-    """
+    Represents all possible tile values in the 2048 game with exponential progression.
 
+    Enum names (ONE, TWO, etc.) correspond to powers of 2:
+    - ONE = 2¹ (2)
+    - TWO = 2² (4)
+    - ...
+    - ELEVEN = 2¹¹ (2048)
+
+    The ZERO value represents an empty tile space on the board.
+    """
     ZERO = 0
     ONE = 2
     TWO = 4
@@ -21,6 +27,15 @@ class TileValue(IntEnum):
     ELEVEN = 2048
 
     def next(self):
+        """
+        Returns the next value in the progression sequence (current × 2).
+
+        :return: Next TileValue in the sequence
+        :raises StopIteration: When called on ELEVEN (maximum value)
+        :example:
+            >>> TileValue.ONE.next()
+            <TileValue.TWO: 4>
+        """
         members = list(self.__class__)
         index = members.index(self) + 1
 

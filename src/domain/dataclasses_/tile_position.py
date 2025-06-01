@@ -4,7 +4,10 @@ from dataclasses import dataclass
 @dataclass
 class TilePosition:
     """
-    Represents a position of a tile on the board.
+    Represents a coordinate position of a tile on the game board.
+
+    Stores row and column indices (0-based) and provides common position operations.
+    This class is hashable and can be used as a dictionary key.
     """
 
     row_idx: int

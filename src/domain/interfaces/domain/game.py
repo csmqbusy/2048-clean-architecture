@@ -6,18 +6,23 @@ from domain.enums_.move_direction import MoveDirection
 
 class IGame(Protocol):
     """
-    Interface for class that represents a game.
+    Defines the core game interface for 2048.
+
+    Any game implementation must provide these methods to handle game lifecycle and moves.
     """
 
     def start(self) -> GameState:
         """
+        Initializes and starts a new game session.
 
-        :return:
+        :return: Initial game state with starting tiles spawned
         """
 
     def make_move(self, direction: MoveDirection) -> GameState:
         """
-        Starts the game.
+        Processes player move in specified direction and updates game state.
 
-        :return: the result of the game
+        :param direction: Movement direction for tiles
+        :return: Updated game state after move processing
+        :raises: ValueError if move cannot be processed
         """
