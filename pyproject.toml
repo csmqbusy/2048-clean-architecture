@@ -5,6 +5,9 @@ description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = []
 
+[tool.mypy]
+strict = true
+
 [dependency-groups]
 dev = [
     "mypy>=1.15.0",

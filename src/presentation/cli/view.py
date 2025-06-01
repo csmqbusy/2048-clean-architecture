@@ -1,7 +1,6 @@
 import sys
-import tty
-
 import termios
+import tty
 
 from domain.enums_.move_direction import MoveDirection
 from presentation.cli.models import CliRenderData
