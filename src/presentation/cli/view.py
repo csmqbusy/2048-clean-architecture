@@ -52,7 +52,6 @@ class CliView:
             if row_i == dim - 1:
                 self._display_board_footer(dim, data.tile_width)
 
-
     def get_next_move(self) -> MoveDirection:
         """
         Captures and returns the player's move direction from keyboard input.
@@ -68,13 +67,13 @@ class CliView:
                 print("Bye-bye!")
                 sys.exit(0)
 
-            if key == '\x1b[A':
+            if key == "\x1b[A":
                 return MoveDirection.UP
-            elif key == '\x1b[B':
+            elif key == "\x1b[B":
                 return MoveDirection.DOWN
-            elif key == '\x1b[C':
+            elif key == "\x1b[C":
                 return MoveDirection.RIGHT
-            elif key == '\x1b[D':
+            elif key == "\x1b[D":
                 return MoveDirection.LEFT
 
     def _get_key(self) -> str:
@@ -92,17 +91,19 @@ class CliView:
             tty.setraw(sys.stdin.fileno())
             key_press = sys.stdin.read(1)
 
-            if key_press == '\x03':  # Ctrl+C
+            if key_press == "\x03":  # Ctrl+C
                 raise KeyboardInterrupt("Exit")
 
-            if key_press == '\x1b':  # Escape sequence (arrow keys etc)
+            if key_press == "\x1b":  # Escape sequence (arrow keys etc)
                 key_press += sys.stdin.read(2)
 
             return key_press
 
         finally:
             # Restore original terminal settings
-            termios.tcsetattr(file_descriptor, termios.TCSADRAIN, original_terminal_settings)
+            termios.tcsetattr(
+                file_descriptor, termios.TCSADRAIN, original_terminal_settings
+            )
 
     def _get_tile_components(self, tile_width: int) -> tuple[str, ...]:
         """
@@ -140,7 +141,7 @@ class CliView:
         tile: str,
         color: str,
         component: str,
-        tile_width: int
+        tile_width: int,
     ) -> None:
         """
         Renders a single component of a tile with proper coloring.

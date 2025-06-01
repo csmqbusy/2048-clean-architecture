@@ -20,7 +20,9 @@ def create_board_dependency(dimension: Dimension) -> IBoard:
     return Board.create(dimension=dimension)
 
 
-def create_tile_spawner_dependency(tile2_spawn_chance: int | None = None) -> ITileSpawner:
+def create_tile_spawner_dependency(
+    tile2_spawn_chance: int | None = None,
+) -> ITileSpawner:
     return TileSpawner(tile2_spawn_chance=tile2_spawn_chance)
 
 

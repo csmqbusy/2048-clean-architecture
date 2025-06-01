@@ -62,10 +62,14 @@ class Game:
         tiles_after = self._board.get_tiles()
 
         if self._has_board_changed(tiles_before, tiles_after):
-            self._tile_spawner.spawn(tiles_after, 1, self._board.get_empty_tiles_positions())
+            self._tile_spawner.spawn(
+                tiles_after, 1, self._board.get_empty_tiles_positions()
+            )
 
         game_result: GameResult | None = self._get_game_result(tiles_after)
-        game_status = GameStatus.IN_PROGRESS if game_result is None else GameStatus.COMPLETED
+        game_status = (
+            GameStatus.IN_PROGRESS if game_result is None else GameStatus.COMPLETED
+        )
 
         return GameState(
             tiles=tiles_after,
@@ -193,7 +197,10 @@ class Game:
                     continue
 
                 if tiles[source][i].value != TileValue.ZERO:
-                    tiles[source][i], tiles[target][i] = tiles[target][i], tiles[source][i]
+                    tiles[source][i], tiles[target][i] = (
+                        tiles[target][i],
+                        tiles[source][i],
+                    )
                     source -= 1
                     target -= 1
                 else:
@@ -204,7 +211,10 @@ class Game:
             target = self._dim - 1
             source = self._dim - 2
             while source >= 0:
-                if tiles[target][i].value != TileValue.ZERO and tiles[target][i] == tiles[source][i]:
+                if (
+                    tiles[target][i].value != TileValue.ZERO
+                    and tiles[target][i] == tiles[source][i]
+                ):
                     new_tile = Tile(value=tiles[target][i].value.next())
                     tiles[target][i] = new_tile
 
@@ -238,7 +248,10 @@ class Game:
                     continue
 
                 if tiles[source][i].value != TileValue.ZERO:
-                    tiles[source][i], tiles[target][i] = tiles[target][i], tiles[source][i]
+                    tiles[source][i], tiles[target][i] = (
+                        tiles[target][i],
+                        tiles[source][i],
+                    )
                     source += 1
                     target += 1
                 else:
@@ -249,7 +262,10 @@ class Game:
             target = 0
             source = 1
             while source < self._dim:
-                if tiles[target][i].value != TileValue.ZERO and tiles[target][i] == tiles[source][i]:
+                if (
+                    tiles[target][i].value != TileValue.ZERO
+                    and tiles[target][i] == tiles[source][i]
+                ):
                     new_tile = Tile(value=tiles[target][i].value.next())
                     tiles[target][i] = new_tile
 

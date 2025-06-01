@@ -59,7 +59,8 @@ class CliPresenter:
         for row in game_state.tiles:
             formatted_row = [
                 f"{tile.value:^{self._tile_width}}"
-                if tile.value != TileValue.ZERO else " " * self._tile_width
+                if tile.value != TileValue.ZERO
+                else " " * self._tile_width
                 for tile in row
             ]
             formatted_board.append(formatted_row)

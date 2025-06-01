@@ -17,7 +17,12 @@ class TileSpawner:
         """
         self._tile2_spawn_chance = tile2_spawn_chance or 0.9
 
-    def spawn(self, board: list[list[Tile]], qty: int, empty_cells: list[TilePosition]) -> None:
+    def spawn(
+        self,
+        board: list[list[Tile]],
+        qty: int,
+        empty_cells: list[TilePosition],
+    ) -> None:
         """
         Spawns new tiles on random empty positions of the board.
 
@@ -44,4 +49,8 @@ class TileSpawner:
 
         :return: TileValue.ONE (with spawn_chance probability) or TileValue.TWO.
         """
-        return TileValue.ONE if random.random() < self._tile2_spawn_chance else TileValue.TWO
+        return (
+            TileValue.ONE
+            if random.random() < self._tile2_spawn_chance
+            else TileValue.TWO
+        )

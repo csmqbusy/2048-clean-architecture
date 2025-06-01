@@ -11,7 +11,12 @@ class ITileSpawner(Protocol):
     Any implementation must provide a way to spawn new tiles on the game board.
     """
 
-    def spawn(self, board: list[list[Tile]], qty: int, empty_cells: list[TilePosition]) -> None:
+    def spawn(
+        self,
+        board: list[list[Tile]],
+        qty: int,
+        empty_cells: list[TilePosition],
+    ) -> None:
         """
         Spawns new tiles on specified empty positions of the game board.
 

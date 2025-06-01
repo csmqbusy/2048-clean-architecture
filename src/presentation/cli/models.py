@@ -5,6 +5,7 @@ from enum import Enum
 @dataclass
 class CliRenderData:
     """Container for all data required to render the 2048 game in a command-line interface."""
+
     tiles: list[list[str]]
     tiles_colors: list[list[str]]
     score: str
@@ -22,6 +23,7 @@ class TileColor(Enum):
 
     Colors use 256-color mode (xterm) for consistent terminal display.
     """
+
     EMPTY = "\033[0m"  # Reset to default
     TWO = "\033[1m\033[48;5;229m\033[38;5;94m"  # Light yellow / brown text
     FOUR = "\033[1m\033[48;5;223m\033[38;5;94m"  # Pale orange / brown text

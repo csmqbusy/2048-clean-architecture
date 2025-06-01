@@ -19,6 +19,7 @@ class Dependencies:
 
     :param game_loop: Main game loop use case that coordinates the game flow
     """
+
     game_loop: GameLoopUseCase
 
 

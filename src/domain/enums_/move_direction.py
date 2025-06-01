@@ -7,6 +7,7 @@ class MoveDirection(Enum):
 
     Used to control tile sliding and merging behavior in the 2048 game.
     """
+
     UP = "up"
     DOWN = "down"
     LEFT = "left"

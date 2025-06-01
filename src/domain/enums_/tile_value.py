@@ -13,6 +13,7 @@ class TileValue(IntEnum):
 
     The ZERO value represents an empty tile space on the board.
     """
+
     ZERO = 0
     ONE = 2
     TWO = 4
