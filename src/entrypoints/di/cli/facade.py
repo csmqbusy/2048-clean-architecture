@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from application.use_cases.game_use_case import GameLoopUseCase
-from entrypoints.di.cli.container import (
+from src.application.use_cases.game_use_case import GameLoopUseCase
+from src.entrypoints.di.cli.container import (
     create_board_dependency,
     create_dimension_dependency,
     create_game_dependency,

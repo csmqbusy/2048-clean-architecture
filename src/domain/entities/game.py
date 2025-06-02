@@ -1,13 +1,13 @@
 import copy
 
-from domain.dataclasses_.game_result import GameState
-from domain.dataclasses_.tile import Tile
-from domain.enums_.game_result import GameResult
-from domain.enums_.game_status import GameStatus
-from domain.enums_.move_direction import MoveDirection
-from domain.enums_.tile_value import TileValue
-from domain.interfaces.domain.board import IBoard
-from domain.interfaces.domain.tile_spawner import ITileSpawner
+from src.domain.dataclasses_.game_result import GameState
+from src.domain.dataclasses_.tile import Tile
+from src.domain.enums_.game_result import GameResult
+from src.domain.enums_.game_status import GameStatus
+from src.domain.enums_.move_direction import MoveDirection
+from src.domain.enums_.tile_value import TileValue
+from src.domain.interfaces.domain.board import IBoard
+from src.domain.interfaces.domain.tile_spawner import ITileSpawner
 
 
 class Game:

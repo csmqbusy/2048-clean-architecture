@@ -1,7 +1,7 @@
 from typing import Protocol
 
-from application.ports.presenter_output import IPresenterOutput
-from domain.enums_.move_direction import MoveDirection
+from src.application.ports.presenter_output import IPresenterOutput
+from src.domain.enums_.move_direction import MoveDirection
 
 
 class IView(Protocol):

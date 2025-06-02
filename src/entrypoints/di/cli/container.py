@@ -1,15 +1,15 @@
-from application.ports.presenter import IPresenter
-from application.ports.view import IView
-from application.use_cases.game_use_case import GameLoopUseCase
-from domain.dataclasses_.dimension import Dimension
-from domain.entities.board import Board
-from domain.entities.game import Game
-from domain.entities.tile_spawner import TileSpawner
-from domain.interfaces.domain.board import IBoard
-from domain.interfaces.domain.game import IGame
-from domain.interfaces.domain.tile_spawner import ITileSpawner
-from presentation.cli.presenter import CliPresenter
-from presentation.cli.view import CliView
+from src.application.ports.presenter import IPresenter
+from src.application.ports.view import IView
+from src.application.use_cases.game_use_case import GameLoopUseCase
+from src.domain.dataclasses_.dimension import Dimension
+from src.domain.entities.board import Board
+from src.domain.entities.game import Game
+from src.domain.entities.tile_spawner import TileSpawner
+from src.domain.interfaces.domain.board import IBoard
+from src.domain.interfaces.domain.game import IGame
+from src.domain.interfaces.domain.tile_spawner import ITileSpawner
+from src.presentation.cli.presenter import CliPresenter
+from src.presentation.cli.view import CliView
 
 
 def create_dimension_dependency() -> Dimension:

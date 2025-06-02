@@ -1,4 +1,4 @@
-from entrypoints.di.cli.facade import Dependencies, dependencies_facade
+from src.entrypoints.di.cli.facade import Dependencies, dependencies_facade
 
 
 def start_cli_app():

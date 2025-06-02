@@ -1,7 +1,7 @@
 from typing import Protocol
 
-from domain.dataclasses_.game_result import GameState
-from domain.enums_.move_direction import MoveDirection
+from src.domain.dataclasses_.game_result import GameState
+from src.domain.enums_.move_direction import MoveDirection
 
 
 class IGame(Protocol):

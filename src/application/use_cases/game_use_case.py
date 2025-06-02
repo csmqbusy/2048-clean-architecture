@@ -1,10 +1,10 @@
-from application.ports.presenter import IPresenter
-from application.ports.presenter_output import IPresenterOutput
-from application.ports.view import IView
-from domain.dataclasses_.game_result import GameState
-from domain.enums_.game_status import GameStatus
-from domain.enums_.move_direction import MoveDirection
-from domain.interfaces.domain.game import IGame
+from src.application.ports.presenter import IPresenter
+from src.application.ports.presenter_output import IPresenterOutput
+from src.application.ports.view import IView
+from src.domain.dataclasses_.game_result import GameState
+from src.domain.enums_.game_status import GameStatus
+from src.domain.enums_.move_direction import MoveDirection
+from src.domain.interfaces.domain.game import IGame
 
 
 class GameLoopUseCase:

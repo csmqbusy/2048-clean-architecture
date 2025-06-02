@@ -1,7 +1,7 @@
 from typing import Protocol
 
-from domain.dataclasses_.tile import Tile
-from domain.dataclasses_.tile_position import TilePosition
+from src.domain.dataclasses_.tile import Tile
+from src.domain.dataclasses_.tile_position import TilePosition
 
 
 class ITileSpawner(Protocol):

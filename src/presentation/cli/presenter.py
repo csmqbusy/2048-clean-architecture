@@ -1,8 +1,8 @@
-from domain.dataclasses_.game_result import GameState
-from domain.enums_.game_result import GameResult
-from domain.enums_.game_status import GameStatus
-from domain.enums_.tile_value import TileValue
-from presentation.cli.models import CliRenderData, TileColor
+from src.domain.dataclasses_.game_result import GameState
+from src.domain.enums_.game_result import GameResult
+from src.domain.enums_.game_status import GameStatus
+from src.domain.enums_.tile_value import TileValue
+from src.presentation.cli.models import CliRenderData, TileColor
 
 
 class CliPresenter:

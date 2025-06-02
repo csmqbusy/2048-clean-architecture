@@ -2,8 +2,8 @@ import sys
 import termios
 import tty
 
-from domain.enums_.move_direction import MoveDirection
-from presentation.cli.models import CliRenderData
+from src.domain.enums_.move_direction import MoveDirection
+from src.presentation.cli.models import CliRenderData
 
 
 class CliView:

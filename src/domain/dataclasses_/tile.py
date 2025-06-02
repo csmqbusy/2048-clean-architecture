@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from domain.enums_.tile_value import TileValue
+from src.domain.enums_.tile_value import TileValue
 
 
 @dataclass

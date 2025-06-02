@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from domain.dataclasses_.dimension import Dimension
-from domain.dataclasses_.tile import Tile
-from domain.dataclasses_.tile_position import TilePosition
+from src.domain.dataclasses_.dimension import Dimension
+from src.domain.dataclasses_.tile import Tile
+from src.domain.dataclasses_.tile_position import TilePosition
 
 
 class IBoard(Protocol):

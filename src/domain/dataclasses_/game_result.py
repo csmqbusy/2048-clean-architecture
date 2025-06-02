@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from domain.dataclasses_.tile import Tile
-from domain.enums_.game_result import GameResult
-from domain.enums_.game_status import GameStatus
+from src.domain.dataclasses_.tile import Tile
+from src.domain.enums_.game_result import GameResult
+from src.domain.enums_.game_status import GameStatus
 
 
 @dataclass

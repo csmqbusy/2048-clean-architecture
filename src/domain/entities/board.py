@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from domain.dataclasses_.dimension import Dimension
-from domain.dataclasses_.tile import Tile
-from domain.dataclasses_.tile_position import TilePosition
-from domain.enums_.tile_value import TileValue
+from src.domain.dataclasses_.dimension import Dimension
+from src.domain.dataclasses_.tile import Tile
+from src.domain.dataclasses_.tile_position import TilePosition
+from src.domain.enums_.tile_value import TileValue
 
 
 class Board:
