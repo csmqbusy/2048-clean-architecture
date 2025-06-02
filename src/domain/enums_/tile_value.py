@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from enum import IntEnum
 
 
@@ -27,7 +29,7 @@ class TileValue(IntEnum):
     TEN = 1024
     ELEVEN = 2048
 
-    def next(self):
+    def next(self) -> TileValue:
         """
         Returns the next value in the progression sequence (current × 2).
 

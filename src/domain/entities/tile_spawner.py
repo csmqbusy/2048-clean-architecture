@@ -34,7 +34,7 @@ class TileSpawner:
         if qty not in (1, 2):
             raise ValueError("qty must be 1 or 2")
 
-        unique_positions = set()
+        unique_positions: set[TilePosition] = set()
         while len(unique_positions) < qty:
             position = random.choice(empty_cells)
             unique_positions.add(position)
