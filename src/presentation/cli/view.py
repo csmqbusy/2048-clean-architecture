@@ -2,29 +2,46 @@ import sys
 import termios
 import tty
 
+from src.application.ports.presenter_output import IPresenterOutput
 from src.domain.enums_.move_direction import MoveDirection
-from src.presentation.cli.models import CliRenderData
+from src.presentation.cli.models import TileColor
 
 
 class CliView:
     """
-    Command-line interface implementation for the 2048 game.
-    Handles:
-    - Rendering the game board with colored tiles and borders
-    - Displaying game status and score
-    - Capturing player input (arrow keys)
-    - Managing terminal display settings
+    Renders 2048 game in terminal with colored tiles and handles player input.
+
+    Features:
+    - Responsive board rendering with customizable tile width
+    - ANSI color support for tiles and borders
+    - Arrow key input handling
+    - Terminal state preservation
     """
+
+    _DEFAULT_TILE_WIDTH = 6
+    _DEFAULT_COLOR = "\033[0m"
+    _DEFAULT_BORDER_COLOR = "\033[0;37m"
 
     def __init__(
         self,
-        default_color: str = "\033[0m",
-        border_color: str = "\033[0;37m",
+        tile_width: int = _DEFAULT_TILE_WIDTH,
+        default_color: str = _DEFAULT_COLOR,
+        border_color: str = _DEFAULT_BORDER_COLOR,
     ):
+        """
+        :param tile_width: Minimum width for each tile (≥4)
+        :param default_color: ANSI reset color code
+        :param border_color: ANSI color code for borders
+        :raises ValueError: If tile_width is too small
+        """
+        if tile_width < 4:
+            raise ValueError("Tile width must be at least 4")
+
+        self._tile_width = tile_width
         self._default_color = default_color
         self._border_color = border_color
 
-    def display(self, data: CliRenderData) -> None:
+    def display(self, data: IPresenterOutput) -> None:
         """
         Renders the complete game interface including:
         - Game status message
@@ -39,18 +56,23 @@ class CliView:
 
         dim = len(data.tiles)
 
-        self._display_board_header(dim, data.tile_width)
+        self._display_board_header(dim, self._tile_width)
 
         for row_i in range(dim):
-            for component in self._get_tile_components(data.tile_width):
+            for component in self._get_tile_components(self._tile_width):
                 self._display_separator()
-                for tile, color in zip(data.tiles[row_i], data.tiles_colors[row_i]):
-                    self._display_tile_component(tile, color, component, data.tile_width)
+                for tile in data.tiles[row_i]:
+                    formatted_tile = self._format_tile(tile)
+                    tile_color = self._get_tile_color(tile)
+
+                    self._display_tile_component(
+                        formatted_tile, tile_color, component, self._tile_width
+                    )
                 self._display_separator()
                 print()
 
             if row_i == dim - 1:
-                self._display_board_footer(dim, data.tile_width)
+                self._display_board_footer(dim, self._tile_width)
 
     def get_next_move(self) -> MoveDirection:
         """
@@ -104,6 +126,18 @@ class CliView:
             termios.tcsetattr(
                 file_descriptor, termios.TCSADRAIN, original_terminal_settings
             )
+
+    def _format_tile(self, tile: str) -> str:
+        """Centers tile value or returns empty space"""
+        if tile:
+            return f"{tile:^{self._tile_width}}"
+        return " " * self._tile_width
+
+    def _get_tile_color(self, tile: str) -> str:
+        """Returns ANSI color code for given tile value"""
+        if tile:
+            return TileColor.get_color(int(tile))
+        return TileColor.EMPTY.value
 
     def _get_tile_components(self, tile_width: int) -> tuple[str, ...]:
         """

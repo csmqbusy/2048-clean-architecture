@@ -3,14 +3,12 @@ from enum import Enum
 
 
 @dataclass
-class CliRenderData:
+class PresenterOutput:
     """Container for all data required to render the 2048 game in a command-line interface."""
 
     tiles: list[list[str]]
-    tiles_colors: list[list[str]]
     score: str
     message: str
-    tile_width: int
 
 
 class TileColor(Enum):
