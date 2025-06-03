@@ -84,6 +84,7 @@ class Game:
 
         :param move: Direction to move
         :param tiles: Current board tiles to modify
+        :raises ValueError: if move cannot be processed
         """
         if move == MoveDirection.UP:
             self._apply_move_up(tiles)
@@ -93,6 +94,8 @@ class Game:
             self._apply_move_right(tiles)
         elif move == MoveDirection.LEFT:
             self._apply_move_left(tiles)
+        else:
+            raise ValueError(f"Invalid move direction: {move}")
 
     def _apply_move_right(self, tiles: list[list[Tile]]) -> None:
         """
