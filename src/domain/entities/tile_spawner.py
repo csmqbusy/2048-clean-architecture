@@ -8,7 +8,7 @@ from src.domain.enums_.tile_value import TileValue
 class TileSpawner:
     """Handles spawning new tiles on the game board with controlled probabilities."""
 
-    def __init__(self, tile2_spawn_chance: int | None = None) -> None:
+    def __init__(self, tile2_spawn_chance: float | None = None) -> None:
         """
         Initializes the tile spawner with a custom probability for TileValue.ONE.
 
