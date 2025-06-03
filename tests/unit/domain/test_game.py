@@ -1,33 +1,33 @@
 import pytest
 
-from src.domain.enums_.move_direction import MoveDirection
-from src.domain.enums_.game_status import GameStatus
 from src.domain.dataclasses_.game_result import GameState
-from src.domain.enums_.game_result import GameResult
 from src.domain.dataclasses_.tile import Tile
 from src.domain.entities.game import Game
+from src.domain.enums_.game_result import GameResult
+from src.domain.enums_.game_status import GameStatus
+from src.domain.enums_.move_direction import MoveDirection
 from tests.unit.objects import (
-    empty_board,
-    board_with_lose_condition,
-    board_with_win_condition,
-    board_with_one_possible_move,
     board_random_state_1,
-    board_random_state_2,
-    board_random_state_3,
+    board_random_state_1_swipe_down,
     board_random_state_1_swipe_left,
     board_random_state_1_swipe_right,
     board_random_state_1_swipe_up,
-    board_random_state_1_swipe_down,
+    board_random_state_2,
+    board_random_state_2_swipe_down,
     board_random_state_2_swipe_left,
     board_random_state_2_swipe_right,
     board_random_state_2_swipe_up,
-    board_random_state_2_swipe_down,
+    board_random_state_3,
+    board_random_state_3_swipe_down,
     board_random_state_3_swipe_left,
     board_random_state_3_swipe_right,
     board_random_state_3_swipe_up,
-    board_random_state_3_swipe_down,
     board_with_almost_win_condition,
     board_with_almost_win_condition_swipe_right,
+    board_with_lose_condition,
+    board_with_one_possible_move,
+    board_with_win_condition,
+    empty_board,
 )
 
 

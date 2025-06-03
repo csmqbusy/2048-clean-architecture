@@ -4,7 +4,7 @@ from src.domain.dataclasses_.tile import Tile
 from src.domain.entities.game import Game
 from src.domain.entities.tile_spawner import TileSpawner
 from src.domain.enums_.tile_value import TileValue
-from tests.unit.objects import empty_board, board_random_state_1
+from tests.unit.objects import board_random_state_1, empty_board
 
 
 @pytest.mark.parametrize(

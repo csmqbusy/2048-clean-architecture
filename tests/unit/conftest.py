@@ -1,12 +1,12 @@
 import pytest
 
-from src.domain.enums_.tile_value import TileValue
-from src.domain.dataclasses_.tile_position import TilePosition
+from src.domain.dataclasses_.dimension import Dimension
 from src.domain.dataclasses_.tile import Tile
+from src.domain.dataclasses_.tile_position import TilePosition
+from src.domain.entities.board import Board
 from src.domain.entities.game import Game
 from src.domain.entities.tile_spawner import TileSpawner
-from src.domain.entities.board import Board
-from src.domain.dataclasses_.dimension import Dimension
+from src.domain.enums_.tile_value import TileValue
 from tests.unit.objects import board_with_full_column, empty_board
 
 
