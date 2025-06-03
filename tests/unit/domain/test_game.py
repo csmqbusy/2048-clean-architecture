@@ -41,47 +41,47 @@ def test_start(game: Game):
 
 @pytest.mark.parametrize(
     (
-            "tiles",
-            "move",
-            "expected_tiles",
-            "spawned_tiles_qty",
-            "score",
-            "expected_score",
-            "expected_status",
-            "expected_result",
+        "tiles",
+        "move",
+        "expected_tiles",
+        "spawned_tiles_qty",
+        "score",
+        "expected_score",
+        "expected_status",
+        "expected_result",
     ),
     [
         (
-                board_with_lose_condition(),
-                MoveDirection.RIGHT,
-                board_with_lose_condition(),
-                0,
-                0,
-                0,
-                GameStatus.COMPLETED,
-                GameResult.LOSE,
+            board_with_lose_condition(),
+            MoveDirection.RIGHT,
+            board_with_lose_condition(),
+            0,
+            0,
+            0,
+            GameStatus.COMPLETED,
+            GameResult.LOSE,
         ),
         (
-                board_random_state_3(),
-                MoveDirection.UP,
-                board_random_state_3_swipe_up(),
-                1,
-                0,
-                48,
-                GameStatus.IN_PROGRESS,
-                None,
+            board_random_state_3(),
+            MoveDirection.UP,
+            board_random_state_3_swipe_up(),
+            1,
+            0,
+            48,
+            GameStatus.IN_PROGRESS,
+            None,
         ),
         (
-                board_with_almost_win_condition(),
-                MoveDirection.RIGHT,
-                board_with_almost_win_condition_swipe_right(),
-                1,
-                0,
-                2048,
-                GameStatus.COMPLETED,
-                GameResult.WIN,
+            board_with_almost_win_condition(),
+            MoveDirection.RIGHT,
+            board_with_almost_win_condition_swipe_right(),
+            1,
+            0,
+            2048,
+            GameStatus.COMPLETED,
+            GameResult.WIN,
         ),
-    ]
+    ],
 )
 def test_make_move(
     game: Game,
@@ -118,7 +118,7 @@ def test_make_move(
         (board_random_state_1(), MoveDirection.RIGHT, board_random_state_1_swipe_right()),
         (board_random_state_2(), MoveDirection.LEFT, board_random_state_2_swipe_left()),
         (board_random_state_3(), MoveDirection.UP, board_random_state_3_swipe_up()),
-    ]
+    ],
 )
 def test__apply_move(
     game: Game,
@@ -137,7 +137,7 @@ def test__apply_move(
         (board_random_state_1(), board_random_state_1_swipe_right()),
         (board_random_state_2(), board_random_state_2_swipe_right()),
         (board_random_state_3(), board_random_state_3_swipe_right()),
-    ]
+    ],
 )
 def test__apply_move_right(
     game: Game, tiles: list[list[Tile]], expected_result: list[list[Tile]]
@@ -153,7 +153,7 @@ def test__apply_move_right(
         (board_random_state_1(), board_random_state_1_swipe_left()),
         (board_random_state_2(), board_random_state_2_swipe_left()),
         (board_random_state_3(), board_random_state_3_swipe_left()),
-    ]
+    ],
 )
 def test__apply_move_left(
     game: Game, tiles: list[list[Tile]], expected_result: list[list[Tile]]
@@ -169,7 +169,7 @@ def test__apply_move_left(
         (board_random_state_1(), board_random_state_1_swipe_down()),
         (board_random_state_2(), board_random_state_2_swipe_down()),
         (board_random_state_3(), board_random_state_3_swipe_down()),
-    ]
+    ],
 )
 def test__apply_move_down(
     game: Game, tiles: list[list[Tile]], expected_result: list[list[Tile]]
@@ -185,7 +185,7 @@ def test__apply_move_down(
         (board_random_state_1(), board_random_state_1_swipe_up()),
         (board_random_state_2(), board_random_state_2_swipe_up()),
         (board_random_state_3(), board_random_state_3_swipe_up()),
-    ]
+    ],
 )
 def test__apply_move_up(
     game: Game, tiles: list[list[Tile]], expected_result: list[list[Tile]]
@@ -203,7 +203,7 @@ def test__apply_move_up(
         (board_random_state_2(), board_random_state_2_swipe_up(), False),
         (board_random_state_3(), board_random_state_3_swipe_left(), True),
         (board_random_state_3(), board_random_state_3_swipe_up(), True),
-    ]
+    ],
 )
 def test__has_board_changed(
     game: Game,
@@ -221,7 +221,7 @@ def test__has_board_changed(
         (board_with_win_condition(), GameResult.WIN),
         (board_with_one_possible_move(), None),
         (board_random_state_1(), None),
-    ]
+    ],
 )
 def test__get_game_result(
     game: Game, tiles: list[list[Tile]], expected_result: GameResult | None

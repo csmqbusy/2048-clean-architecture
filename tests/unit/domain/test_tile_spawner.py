@@ -13,9 +13,11 @@ from tests.unit.objects import board_random_state_1, empty_board
         (empty_board(), 1),
         (empty_board(), 2),
         (board_random_state_1(), 1),
-    ]
+    ],
 )
-def test_spawn(game: Game, tile_spawner: TileSpawner, tiles: list[list[Tile]], qty: int):
+def test_spawn(
+    game: Game, tile_spawner: TileSpawner, tiles: list[list[Tile]], qty: int
+):
     game._board._tiles = tiles
     empty_cells_before = game._board.get_empty_tiles_positions()
 
