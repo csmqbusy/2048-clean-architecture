@@ -9,7 +9,7 @@ from src.domain.interfaces.domain.board import IBoard
 from src.domain.interfaces.domain.game import IGame
 from src.domain.interfaces.domain.tile_spawner import ITileSpawner
 from src.presentation.cli.presenter import CliPresenter
-from src.presentation.cli.view import CliView
+from src.presentation.cli.unix_view import UnixCliView
 
 
 def create_dimension_dependency() -> Dimension:
@@ -38,7 +38,7 @@ def create_presenter_dependency() -> IPresenter:
 
 
 def create_view_dependency() -> IView:
-    return CliView()
+    return UnixCliView()
 
 
 def create_game_loop_dependency(

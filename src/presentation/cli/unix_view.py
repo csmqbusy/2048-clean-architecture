@@ -7,15 +7,21 @@ from src.domain.enums_.move_direction import MoveDirection
 from src.presentation.cli.models import TileColor
 
 
-class CliView:
+class UnixCliView:
     """
     Renders 2048 game in terminal with colored tiles and handles player input.
+    Designed specifically for Unix-like systems (Linux, macOS) and may not work on Windows.
 
     Features:
     - Responsive board rendering with customizable tile width
-    - ANSI color support for tiles and borders
-    - Arrow key input handling
-    - Terminal state preservation
+    - ANSI color support for tiles and borders (requires a compatible terminal)
+    - Arrow key input handling (via terminal raw mode)
+    - Terminal state preservation (resets settings on exit)
+
+    Compatibility:
+    - Linux/macOS: Fully supported (relies on POSIX termios and ANSI escapes)
+    - Windows: Not officially supported (ANSI colors may work in some terminals,
+               but input handling will likely fail)
     """
 
     _DEFAULT_TILE_WIDTH = 6
