@@ -2,7 +2,7 @@
 
 A minimal and extensible terminal-based implementation of the classic [2048 game](https://en.wikipedia.org/wiki/2048_(video_game)) written in **Python 3.13** using **Clean Architecture** principles — with no external dependencies.
 
-<img width="300" alt="CLI 2048" src="https://github.com/user-attachments/assets/4b5e436d-2310-4cdd-a05f-1e6351fa5903" />
+<img width="280" alt="CLI 2048" src="https://github.com/user-attachments/assets/4b5e436d-2310-4cdd-a05f-1e6351fa5903" />
 
 
 ## 📦 Project Structure
