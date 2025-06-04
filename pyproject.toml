@@ -3,9 +3,7 @@ name = "2048-clean-architecture"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
-dependencies = [
-    "pytest>=8.3.5",
-]
+dependencies = []
 
 [tool.mypy]
 strict = true
@@ -16,4 +14,5 @@ exclude = [
 [dependency-groups]
 dev = [
     "mypy>=1.15.0",
+    "pytest>=8.4.0",
 ]
